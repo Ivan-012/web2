@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Penales</title>
+  <style>
+    body {
+      text-align: center;
+      background: linear-gradient(180deg, green, #006400);
+      color: white;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 20px;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    canvas {
+      background: #187a36;
+      display: block;
+      margin: 20px auto;
+      border: 3px solid white;
+      border-radius: 10px;
+    }
+
+    button, select {
+      margin: 8px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #mensaje {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 40px;
+      font-weight: bold;
+      text-shadow: 3px 3px 6px black;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    #mensaje.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚽ Juego de Penales ⚽</h1>
+
+  <div id="menu">
+    <label for="equipo">Elegí tu equipo:</label>
+    <select id="equipo">
+      <option>San Lorenzo</option>
+      <option>Boca</option>
+      <option>River</option>
+    </select>
+    <br>
+    <button id="btnJugar">Jugar</button>
+  </div>
+
+  <div id="juego" style="display:none;">
+    <canvas id="cancha" width="800" height="450"></canvas>
+    <br>
+    <button id="subirVel">⬆️ Subir velocidad arquero</button>
+    <button id="bajarVel">⬇️ Bajar velocidad arquero</button>
+    <button id="volverMenu">Volver al menú</button>
+    <p>Velocidad arquero: <span id="velocidadTexto">6</span> | Goles: <span id="goles">0</span></p>
+  </div>
+
+  <div id="mensaje"></div>
+
+  <audio id="golSound" src="gol.mp3" preload="auto"></audio>
+
+  <script src="juego_penales.js"></script>
+</body>
+</html>

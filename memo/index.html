@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memotest Mejorado</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Fredoka One', cursive;
+      text-align: center;
+      background: linear-gradient(135deg, #512f56, #77385e, #ad4d6a, #f17275, #ffae7e);
+      background-size: 400% 400%;
+      animation: gradientMove 5s ease infinite;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      margin: 15px 0 5px;
+      text-shadow: 2px 2px #000;
+      font-size: 2.5rem;
+    }
+
+    #status {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    #game {
+      display: grid;
+      grid-template-columns: repeat(4, 90px);
+      grid-gap: 15px;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+
+    .card {
+      width: 90px;
+      height: 90px;
+      background: #ffffff33;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.5s, background 0.3s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped {
+      background: #fff;
+      color: #333;
+      transform: rotateY(180deg);
+      cursor: default;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
+    #info {
+      font-size: 1.1rem;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      margin: 8px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background: #512f56;
+      color: #fff;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background: #77385e;
+      transform: scale(1.05);
+    }
+
+    #status.win {
+      font-size: 1.8rem;
+      color: #ffea00;
+      text-shadow: 2px 2px 10px #000;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎴 Memotest 🎴</h1>
+  <div id="status">¡Encuentra todas las parejas!</div>
+
+  <!-- 🔘 Opciones de tema -->
+  <div>
+    <label for="theme">Elige un tema: </label>
+    <select id="theme" onchange="startGame()">
+      <option value="frutas">Frutas</option>
+      <option value="animales">Animales</option>
+    </select>
+  </div>
+
+  <!-- 🕐 Contadores -->
+  <div id="info">
+    ⏱️ Tiempo: <span id="time">0</span>s | 🧮 Movimientos: <span id="moves">0</span>
+  </div>
+
+  <!-- 🎮 Zona del juego -->
+  <div id="game"></div>
+
+  <button onclick="startGame()">🔄 Reiniciar</button>
+
+  <script>
+    // 🎵 Sonidos básicos (clic y victoria)
+    const clickSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_13d4a4f621.mp3?filename=click-124467.mp3");
+    const winSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_ef58da25c0.mp3?filename=win-136828.mp3");
+
+    // 🧩 Conjuntos de emojis
+    const themes = {
+      frutas: ["🍎","🍌","🍇","🍒","🍍","🥝","🍉","🍓"],
+      animales: ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼"]
+    };
+
+    let emojis = [];
+    let cards = [];
+    let flipped = [];
+    let matched = 0;
+    let moves = 0;
+    let timer = 0;
+    let interval;
+
+    // 🚀 Inicializa el juego
+    function startGame() {
+      clearInterval(interval);
+      timer = 0;
+      moves = 0;
+      matched = 0;
+      flipped = [];
+
+      // Tema elegido
+      const selected = document.getElementById("theme").value;
+      emojis = themes[selected];
+
+      // Actualizar texto inicial
+      document.getElementById("status").textContent = "¡Encuentra todas las parejas!";
+      document.getElementById("status").classList.remove("win");
+      document.getElementById("moves").textContent = "0";
+      document.getElementById("time").textContent = "0";
+
+      // Comenzar cronómetro
+      interval = setInterval(() => {
+        timer++;
+        document.getElementById("time").textContent = timer;
+      }, 1000);
+
+      // Crear cartas duplicadas y mezcladas
+      const game = document.getElementById("game");
+      game.innerHTML = "";
+      cards = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+
+      cards.forEach((emoji, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.index = index;
+        card.dataset.emoji = emoji;
+        card.addEventListener("click", flipCard);
+        game.appendChild(card);
+      });
+    }
+
+    // 🔄 Voltear carta
+    function flipCard() {
+      if (flipped.length === 2) return; // solo 2 a la vez
+
+      const card = this;
+      if (card.classList.contains("flipped")) return;
+
+      clickSound.play(); // sonido de clic
+      card.textContent = card.dataset.emoji;
+      card.classList.add("flipped");
+      flipped.push(card);
+
+      if (flipped.length === 2) {
+        setTimeout(checkMatch, 800);
+      }
+    }
+
+    // 🧠 Verificar si las cartas coinciden
+    function checkMatch() {
+      const [c1, c2] = flipped;
+      moves++;
+      document.getElementById("moves").textContent = moves;
+
+      if (c1.dataset.emoji === c2.dataset.emoji) {
+        c1.classList.add("hidden");
+        c2.classList.add("hidden");
+        matched++;
+        if (matched === emojis.length) {
+          clearInterval(interval);
+          document.getElementById("status").textContent = "🎉 ¡Ganaste! 🎉";
+          document.getElementById("status").classList.add("win");
+          winSound.play();
+        }
+      } else {
+        c1.textContent = "";
+        c2.textContent = "";
+        c1.classList.remove("flipped");
+        c2.classList.remove("flipped");
+      }
+      flipped = [];
+    }
+
+    // ▶️ Comenzar automáticamente al cargar
+    startGame();
+  </script>
+</body>
+</html>
