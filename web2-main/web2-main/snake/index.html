@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>The Snake Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>🐍 Snake Game</h1>
+  <div class="startScreen">
+    <h2>Bienvenido</h2>
+    <p>Ingresa tu nombre (máx 12 caracteres)</p>
+    <input id="nameInput" type="text" maxlength="12" />
+    <div>
+      <button onclick="" id="startButton">Comenzar</button>
+    </div>
+  </div>
+
+  <div class="game-container">
+    <canvas id="game" width="400" height="400"></canvas>
+    <table id="scoreTable" border="1">
+      <tr>
+          <th>Nombre</th>
+          <th>Puntaje</th>
+      </tr>
+    </table>
+  </div>
+  <p>Usá las flechas ← ↑ → ↓ para jugar</p>
+  
+  <div class="gameOver">
+    <h2>¡Juego Terminado!</h2>
+    <p>Tu puntaje final es: <span id="finalScore">0</span></p>
+    <button id="restartButton" onclick="">Reiniciar Juego</button>
+  </div>
+  <script src="snake.js"></script>
+</body>
+</html>

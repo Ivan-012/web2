@@ -1,0 +1,151 @@
+:root{
+  --bg:#0d1117;
+  --panel:#0f1720;
+  --accent:#00c2a8;
+  --muted:#98a0a8;
+  --muted-2:#c7d2da;
+  --wall:#333;
+  --btn-bg:#0b1620;
+  --btn-border: rgba(255,255,255,0.06);
+  --glass: rgba(255,255,255,0.03);
+  --success: #58b3ff; /* jugador 1 */
+  --danger: #ff6b6b;  /* jugador 2 */
+  --bot: #a17cff;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, Arial, sans-serif;
+  background:linear-gradient(180deg,#071020 0%, var(--bg) 100%);
+  color:#e6eef6;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+
+header{
+  width:100%;
+  max-width:1100px;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.brand h1{
+  margin:0;
+  font-size:20px;
+  letter-spacing:0.6px;
+  font-weight:700;
+}
+.brand .subtitle{
+  margin:4px 0 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* Controls */
+.controls{display:flex;gap:12px;align-items:center}
+.modes{display:flex;gap:8px}
+.mode-btn{
+  background:var(--btn-bg);
+  color:var(--muted-2);
+  border:1px solid var(--btn-border);
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+.mode-btn[aria-pressed="true"]{
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  color:var(--accent);
+  box-shadow: 0 6px 18px rgba(3,8,15,0.45);
+  border-color: rgba(0,0,0,0.25);
+}
+.primary{
+  background:var(--accent);
+  color:#042023;
+  border:none;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+}
+.primary:hover{filter:brightness(0.95)}
+.primary:active{transform:translateY(1px)}
+
+.status{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+#modeLabel{font-size:13px;color:var(--muted);font-weight:600}
+.score{display:flex;gap:10px;align-items:center}
+.score-item{font-size:14px;padding:6px 8px;border-radius:8px;background:var(--glass);border:1px solid rgba(255,255,255,0.02);font-weight:600}
+
+/* Main layout */
+main{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  padding:12px 20px 40px 20px;
+}
+canvas{
+  background: #a6cbdc10;
+  border:6px solid rgba(255,255,255,0.03);
+  border-radius:12px;
+  box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+  max-width:100%;
+  display:block;
+}
+
+/* Legend / aside */
+.legend{
+  width:260px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius:10px;
+  padding:14px;
+  color:var(--muted);
+  font-size:14px;
+  border:1px solid rgba(255,255,255,0.02);
+}
+.legend h3{margin:0 0 8px 0}
+.legend p{margin:8px 0}
+.legend hr{border:none;border-top:1px solid rgba(255,255,255,0.02);margin:10px 0}
+.legend .legend-colors{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.legend-item{display:flex;gap:0px;align-items:center;color:var(--muted);font-weight:600}
+.dot{width:16px;height:16px;border-radius:50%;display:inline-block;border:2px solid rgba(0,0,0,0.35)}
+.dot-p1{background:var(--success)}
+.dot-p2{background:var(--danger)}
+
+/* Overlay message (ganador) */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+.overlay-text{
+  background:linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.55));
+  color:#fff;
+  padding:22px 28px;
+  border-radius:14px;
+  font-size:22px;
+  font-weight:800;
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 20px 60px rgba(2,6,23,0.7);
+  pointer-events:auto;
+}
+
+/* Responsive */
+@media (max-width:1000px){
+  main{flex-direction:column;align-items:center}
+  .legend{width:90%}
+  header{padding:14px}
+}

@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url(paisaje\ cielo.jpg) no-repeat center center fixed;
+  background-size: cover;
+  font-family:'Poppins', sans-serif;
+}
+
+canvas {
+  background: #70c5ce;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.startScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.8);  
+  z-index: 20;
+}
+
+.startScreen h2 {
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+.startScreen p {
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+.startScreen input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+}
+.startScreen button {
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #cef00f;
+  border: none;
+  color: #333;
+  border-radius: 4px;
+}
+
+.gameOver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+  display: none; 
+  z-index: 10;
+}
+button{
+  margin-top: 8px;
+  padding: 8px ;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #cef00f;
+  border: none;
+  color: #333;
+  border-radius: 4px; 
+}

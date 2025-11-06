@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Batalla de Tanques</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>Batalla de Tanques</h1>
+      <p class="subtitle">Destruye al adversario — ¡que gane el más hábil!</p>
+    </div>
+
+    <div class="controls" role="toolbar" aria-label="Controles principales">
+      <div class="modes" role="tablist" aria-label="Seleccionar modo de juego">
+        <button id="mode-1p" class="mode-btn" aria-pressed="true">1 Jugador (Bot)</button>
+        <button id="mode-2p" class="mode-btn" aria-pressed="false">2 Jugadores</button>
+      </div>
+
+      <button id="restart" class="primary">Reiniciar (N)</button>
+
+   
+    </div>
+  </header>
+
+  <main>
+    <canvas id="game" width="800" height="600" aria-label="Área de juego"></canvas>
+
+    <aside class="legend" aria-label="Información y controles">
+      <h3>Controles</h3>
+      <p><strong>Jugador 1:</strong> W A S D — <kbd>Espacio</kbd> disparo</p>
+      <p><strong>Jugador 2:</strong> Flechas — <kbd>Enter</kbd> disparo</p>
+      <p><strong>Atajo:</strong> <kbd>N</kbd> = Nuevo juego / Reiniciar</p>
+      <hr />
+      <p>Objetivo: destruir al otro tanque. Los puntajes se muestran con el color del tanque.</p>
+      <div class="legend-colors">
+        <div class="legend-item"><span class="dot dot-p1" aria-hidden></span> Jugador 1</div>
+        <div class="legend-item"><span class="dot dot-p2" aria-hidden></span> Jugador 2 / Bot</div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Overlay para mensajes (ganador, info) -->
+  <div id="overlay" class="overlay" aria-live="polite" role="status" hidden>
+    <div id="overlayText" class="overlay-text"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

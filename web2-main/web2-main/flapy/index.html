@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Bird </title>
+  <link rel="stylesheet" href="style.css">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
+  
+
+  <div class="startScreen">
+    <h2>Bienvenido</h2>
+    <p>Ingresa tu nombre (máx 12 caracteres)</p>
+    <input id="nameInput" type="text" maxlength="12" />
+    <div>
+      <button onclick="" id="startButton">Comenzar</button>
+    </div>
+  </div>
+
+  <div class="gameOver">
+    <h2>¡Juego Terminado!</h2>
+    <p>Tu puntaje final es: <span id="finalScore">0</span></p>
+    <button id="restartButton" onclick="">Reiniciar Juego</button>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

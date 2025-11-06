@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'Airstrike';
+  src: local('Airstrike'),
+       url('./fuente/airstrike.woff2') format('woff2'),
+       url('./fuente/airstrike.woff') format('woff'),
+       url('./fuente/airstrike.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+      background: #F5F5DC;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+      font-family: sans-serif;
+      flex-direction: column;
+      position: relative;
+    }
+.startScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.8);  
+  z-index: 20;
+}
+
+.startScreen h2 {
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+.startScreen p {
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+.startScreen input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+}
+.startScreen button {
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #77DD77;
+  border: none;
+  color: #333;
+  border-radius: 4px;
+}
+h1{
+  font-family: Airstrike, sans-serif ;
+  font-size: 36px;
+  color: #333;
+}
+    canvas {
+    border-top: #77DD77 solid 2px;
+    border-left: #77DD77 solid 2px;
+    border-bottom: red 2px solid;
+    border-right: red 2px solid;
+      display: flex;
+    }
+.game-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px; /* espacio entre canvas y tabla */
+}
+
+#scoreTable {
+  min-width: 150px;
+  background: #222;
+  color: #fff;
+  border-radius: 16px;
+  border-top: #77DD77 solid 2px;
+  border-left: #77DD77 solid 2px;
+  border-bottom: red 2px solid;
+  border-right: red 2px solid;
+}
+
+#scoreTable th, #scoreTable td {
+  padding: 8px 12px;
+  text-align: center;
+  border: none;
+  
+}
+.gameOver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+  display: none; /* oculto por defecto */ 
+  z-index: 10;
+}
+button{
+  margin-top: 8px;
+  padding: 8px ;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #77DD77;
+  border: none;
+  color: #333;
+  border-radius: 4px; 
+}
+@media (max-width: 600px) {
+  body {
+    flex-direction: column;
+  }
+  .game-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px; /* espacio entre canvas y tabla en móvil */
+  }
+  #scoreTable {
+    width: 100%; /* tabla ocupa todo el ancho en móvil */
+    max-width: 300px; /* pero no más de 300px */
+  }
+}
