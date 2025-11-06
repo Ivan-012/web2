@@ -159,3 +159,13 @@ footer a.small {
 footer a.small:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 576px){
+#snake{
+overflow:hidden;
+}
+#tanques{
+overflow:hidden;
+}
+}
+
